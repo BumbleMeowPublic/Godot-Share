@@ -46,8 +46,11 @@ void GodotShare::sharePic(const String &path, const String &title, const String 
     NSString * imagePath = [NSString stringWithCString:path.utf8().get_data() encoding:NSUTF8StringEncoding];
     
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    NSData *jpegData = UIImageJPEGRepresentation(image, 1.0);
+    UIImage *jpegImage = [[UIImage alloc] initWithData:jpegData];
     
-    NSArray * shareItems = @[message, image];
+    // NSArray * shareItems = @[message, image];
+    NSArray *shareItems = @[message, jpegImage];
     
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
      //if iPhone
